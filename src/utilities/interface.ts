@@ -57,6 +57,10 @@ export interface CurrentPresident {
   name: string;
 }
 
+export interface FlagProps {
+  country: FullCountry;
+}
+
 export interface FlagsProps {
   flags: FullCountry[] | undefined;
 }

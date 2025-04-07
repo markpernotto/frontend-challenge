@@ -1,0 +1,33 @@
+.flags_container {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  justify-content: center;
+  max-width: 1300px;
+}
+
+.flag_container {
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: #2b2b2b;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  width: 260px;
+}
+.flag_container:hover {
+  background-color: #3b3b3b;
+  cursor: pointer;
+}
+
+.flag_image {
+  object-fit: fill;
+  width: 100%;
+}
