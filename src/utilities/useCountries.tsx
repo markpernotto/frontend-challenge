@@ -13,6 +13,10 @@ export default function useCountries() {
       import.meta.env
         .VITE_RESTFULCOUNTRIES_TOKEN as string,
     ],
-    ([url, token]) => fetcher(url, token),
+    ([url, token]) =>
+      fetcher(
+        url,
+        token,
+      ) as Promise<AllCountries>,
   );
 }

@@ -1,9 +1,12 @@
-import { AllCountries } from "./interface";
+import {
+  AllCountries,
+  Country,
+} from "./interface";
 
 const fetcher = async (
   url: string,
   token: string,
-): Promise<AllCountries> => {
+): Promise<AllCountries | Country> => {
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,7 +19,9 @@ const fetcher = async (
     );
   }
 
-  return res.json() as Promise<AllCountries>;
+  return res.json() as Promise<
+    AllCountries | Country
+  >;
 };
 
 export default fetcher;
