@@ -6,14 +6,12 @@ import {
 
 import CountryDetail from "./components/Country";
 import ExploreCountries from "./components/ExploreCountries";
+import Navigation from "./components/Navigation";
 
 export default function App() {
-  // const { data, error, isLoading } =
-  //   useCountries();
-  // if (error) return <div>Error loading data</div>;
-  // if (isLoading) return <div>Loading...</div>;
   return (
     <BrowserRouter>
+      <Navigation />
       <Routes>
         <Route
           path="/"

@@ -7,6 +7,7 @@ import {
 import { FullCountry } from "../utilities/interface";
 import useCountries from "../hooks/useCountries";
 import Flags from "./Flags";
+import styles from "./components.module.css";
 
 export default function ExploreCountries() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -16,7 +17,7 @@ export default function ExploreCountries() {
       : `?per_page=12&page=${pageNumber}`,
   );
   const [allCountries, setAllCountries] =
-    useState<FullCountry[]>([]);
+    useState<FullCountry[]>(data?.data ?? []);
   const observerRef = useRef(null);
 
   useEffect(() => {
@@ -60,14 +61,19 @@ export default function ExploreCountries() {
     };
   }, [loadNextPage]);
 
-  if (error) return <div>Error loading data</div>;
-
   return (
-    <main>
+    <main className={styles.main_container}>
       <div>SEARCHBAR</div>
       <div>DROPDOWN</div>
       <Flags flags={allCountries} />
       {isLoading && <div>Loading...</div>}
+      {allCountries.length === 0 &&
+        !isLoading && (
+          <div>No countries found</div>
+        )}
+      {error && (
+        <div>Error loading countries</div>
+      )}
       <div
         ref={observerRef}
         style={{ height: "1px" }}

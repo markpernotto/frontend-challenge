@@ -1,10 +1,49 @@
+/*
+  Navigation / Header
+*/
+
+.navigation_bar {
+  background-color: #2b2b2b;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+}
+
+.navigation_bar_contents {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 5%;
+  width: 100%;
+}
+
+.navigation_bar_title h1 {
+  margin: 0;
+}
+
+/*
+  Main Container
+*/
+.main_container {
+  display: block; 
+  min-height: 100vh;
+}
+
+/*
+  Flags
+*/
+
 .flags_container {
   display: flex;
-  gap: 4rem;
+  gap: 2.5rem;
   flex-wrap: wrap;
-  padding: 1rem 2rem;
-  justify-content: center;
-  max-width: 1300px;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 1rem 5%;
 }
 
 .flag_container {
@@ -20,7 +59,7 @@
   overflow: hidden;
   text-align: center;
   text-decoration: none;
-  width: 260px;
+  width: 250px;
 }
 .flag_container:hover {
   background-color: #3b3b3b;
