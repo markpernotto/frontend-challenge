@@ -1,0 +1,72 @@
+export interface CurrentPresident {
+  appointment_end_date: string;
+  appointment_start_date: string;
+  gender: string;
+  href: {
+    country: string;
+    picture: string;
+    self: string;
+  };
+  name: string;
+}
+
+export interface SlimCountry {
+  name: string;
+  currency: string;
+  href: {
+    self: string;
+    flag: string;
+  };
+  iso2: string;
+  iso3: string;
+  phone_code: string;
+}
+
+export interface FullCountry {
+  capital: string;
+  continent: string;
+  covid19: {
+    last_updated: string;
+    total_case: number;
+    total_deaths: number;
+  };
+  currency: string;
+  current_president: CurrentPresident | null;
+  description: string;
+  full_name: string;
+  href: {
+    flag: string;
+    presidents: string;
+    self: string;
+    states: string;
+  };
+  independence_date: string | null;
+  iso2: string;
+  iso3: string;
+  name: string;
+  phone_code: string;
+  population: string;
+  size: string;
+}
+
+export interface Links {
+  first: string;
+  last: string;
+  prev: string;
+  next: string;
+}
+
+export interface Meta {
+  current_page: number;
+  from: number;
+  last_page: number;
+  per_page: number;
+  to: number;
+  total: number;
+}
+
+export interface AllCountries {
+  data: SlimCountry[];
+  links: Links;
+  meta: Meta;
+}
