@@ -1,6 +1,6 @@
 import {
   FlagsProps,
-  SlimCountry,
+  FullCountry,
 } from "../utilities/interface";
 
 export default function Flags({
@@ -10,7 +10,7 @@ export default function Flags({
     <div>
       <h1>Flags</h1>
       <div>
-        {flags?.map((d: SlimCountry) => (
+        {flags?.map((d: FullCountry) => (
           <div key={d.name}>
             <h3>{d.name}</h3>
             <img
