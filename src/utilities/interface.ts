@@ -1,3 +1,11 @@
+// Alphabetical interfaces
+
+export interface AllCountries {
+  data: SlimCountry[];
+  links: Links;
+  meta: Meta;
+}
+
 export interface CurrentPresident {
   appointment_end_date: string;
   appointment_start_date: string;
@@ -10,16 +18,8 @@ export interface CurrentPresident {
   name: string;
 }
 
-export interface SlimCountry {
-  name: string;
-  currency: string;
-  href: {
-    self: string;
-    flag: string;
-  };
-  iso2: string;
-  iso3: string;
-  phone_code: string;
+export interface FlagsProps {
+  flags: SlimCountry[] | undefined;
 }
 
 export interface FullCountry {
@@ -65,8 +65,14 @@ export interface Meta {
   total: number;
 }
 
-export interface AllCountries {
-  data: SlimCountry[];
-  links: Links;
-  meta: Meta;
+export interface SlimCountry {
+  currency: string;
+  href: {
+    self: string;
+    flag: string;
+  };
+  iso2: string;
+  iso3: string;
+  name: string;
+  phone_code: string;
 }

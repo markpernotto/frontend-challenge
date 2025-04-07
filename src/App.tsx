@@ -1,35 +1,14 @@
-import useSWR from "swr";
-import { AllCountries } from "./utilities/interface";
-
-const fetcher = async (
-  url: string,
-  token: string,
-): Promise<AllCountries> => {
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error(
-      "An error occurred while fetching the data.",
-    );
-  }
-
-  return res.json() as Promise<AllCountries>;
-};
+import Flags from "./components/Flags";
+import useCountries from "./utilities/useCountries";
 
 export default function App() {
-  const { data } = useSWR<AllCountries>(
-    [
-      "https://restfulcountries.com/api/v1/countries",
-      import.meta.env
-        .VITE_RESTFULCOUNTRIES_TOKEN as string,
-    ] as [string, string],
-    ([url, token]: [string, string]) =>
-      fetcher(url, token),
+  const { data, error, isLoading } =
+    useCountries();
+  if (error) return <div>Error loading data</div>;
+  if (isLoading) return <div>Loading...</div>;
+  return (
+    <>
+      <Flags flags={data?.data ?? undefined} />
+    </>
   );
-  console.log("data:", data);
-  return <>THIS IS THE VERY BEGINNING</>;
 }
