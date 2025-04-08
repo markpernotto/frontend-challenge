@@ -47,7 +47,7 @@
 }
 
 .flag_container {
-  align-items: center;
+  /* align-items: center; */
   border-radius: 0.5rem;
   background-color: #2b2b2b;
   border-radius: 5px;
@@ -57,7 +57,7 @@
   flex-direction: column;
   gap: 0.5rem;
   overflow: hidden;
-  text-align: center;
+  /* text-align: center; */
   text-decoration: none;
   width: 250px;
 }
@@ -66,10 +66,24 @@
   cursor: pointer;
 }
 
+.flag_country_data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
 .flag_image {
   object-fit: fill;
   width: 100%;
 }
+
+.flag_country_name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
 
 /*
   Country

@@ -12,14 +12,20 @@ const Flag = ({ country }: FlagProps) => {
         alt={country.name}
         className={styles.flag_image}
       />
-      <h3>{country.name}</h3>
-      <div>
-        <strong>Population: </strong>{" "}
-        {country.population}
-        <strong>Region: </strong>{" "}
-        {country.continent}
-        <strong>Capital: </strong>{" "}
-        {country.capital}
+      <div className={styles.flag_country_data}>
+        <h3 className={styles.flag_country_name}>
+          {country.name}
+        </h3>
+        <div>
+          <strong>Capital: </strong>{" "}
+          {country.capital}
+          <br />
+          <strong>Population: </strong>{" "}
+          {country.population}
+          <br />
+          <strong>Region: </strong>{" "}
+          {country.continent}
+        </div>
       </div>
     </Link>
   );
