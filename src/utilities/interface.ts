@@ -119,3 +119,8 @@ export interface SlimCountry {
   name: string;
   phone_code: string;
 }
+
+export interface StateProps {
+  country: string;
+  state: string;
+}

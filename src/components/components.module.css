@@ -8,7 +8,6 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0;
   position: sticky;
   top: 0;
 }
@@ -29,8 +28,9 @@
   Main Container
 */
 .main_container {
-  display: block; 
-  min-height: 100vh;
+  display: block;
+  min-height: calc(100vh - 48px);
+  padding: 0 5%;
 }
 
 /*
@@ -43,7 +43,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 1rem 5%;
+  padding: 1rem 0;
 }
 
 .flag_container {
@@ -70,3 +70,29 @@
   object-fit: fill;
   width: 100%;
 }
+
+/*
+  Country
+*/
+.country_detail_container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.country_detail_container .country_detail_flag_image {
+  margin-top: 0.5rem;
+  max-width: 300px;
+  width: 300px;
+}
+
+.country_detail_container .country_detail_text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+.country_detail_container > div > h1 {
+  margin: 0;
+}
+

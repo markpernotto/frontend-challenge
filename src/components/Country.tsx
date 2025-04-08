@@ -1,28 +1,85 @@
 import { useLocation } from "react-router-dom";
 import useCountry from "../hooks/useCountry";
+import styles from "./components.module.css";
+import useCountryStates from "../hooks/useCountryStates";
 
 export default function CountryDetail() {
   const { pathname } = useLocation();
   const country = pathname.split("/").pop();
   const { data, error, isLoading } =
     useCountry(country);
-  if (error) return <div>Error loading data</div>;
-  if (isLoading) return <div>Loading...</div>;
-
+  const { data: countryStatesData } =
+    useCountryStates(country);
   const countryDetail = data?.data;
+  const countryStates = countryStatesData?.data;
   return (
-    <div>
-      <h1>{countryDetail?.name}</h1>
-      <div>
-        <h3>{countryDetail?.name}</h3>
-        <div>
-          <p>
-            Population:{" "}
-            {countryDetail?.population}
-          </p>
+    <main className={styles.main_container}>
+      {isLoading && <div>Loading...</div>}
+      {error && <div>Error loading data</div>}
+      <div
+        className={
+          styles.country_detail_container
+        }
+      >
+        <div
+          className={
+            styles.country_detail_flag_image
+          }
+        >
+          <img
+            src={countryDetail?.href.flag}
+            alt={countryDetail?.name}
+            className={styles.flag_image}
+          />
         </div>
-        <div></div>
+
+        <div
+          className={styles.country_detail_text}
+        >
+          <h1>{countryDetail?.name}</h1>
+          <div>
+            <p>
+              <strong>Official Name:</strong>{" "}
+              {countryDetail?.full_name}
+            </p>
+            <p>
+              <strong>Population:</strong>{" "}
+              {countryDetail?.population}
+            </p>
+            <p>
+              <strong>Capital:</strong>{" "}
+              {countryDetail?.capital}
+            </p>
+            <p>
+              <strong>Continent:</strong>{" "}
+              {countryDetail?.continent}
+            </p>
+            <p>
+              <strong>Size:</strong>{" "}
+              {countryDetail?.size}
+            </p>
+            <p>
+              <strong>States:</strong>{" "}
+              {Array.isArray(countryStates) &&
+                countryStates.length > 0 &&
+                countryStates.map(
+                  (
+                    state: { name: string },
+                    index: number,
+                  ) => (
+                    <span key={state.name}>
+                      {state.name}
+                      {index <
+                      countryStates.length - 1
+                        ? ", "
+                        : ""}
+                    </span>
+                  ),
+                )}
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
