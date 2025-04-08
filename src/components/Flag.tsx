@@ -16,10 +16,9 @@ const Flag = ({ country }: FlagProps) => {
         <h3 className={styles.flag_country_name}>
           {country.name}
         </h3>
-        <div>
-          <strong>Capital: </strong>{" "}
-          {country.capital}
-          <br />
+        <div
+          className={styles.flag_country_details}
+        >
           <strong>Population: </strong>{" "}
           {country.population}
           <br />

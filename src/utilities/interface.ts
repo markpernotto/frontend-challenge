@@ -124,3 +124,10 @@ export interface StateProps {
   country: string;
   state: string;
 }
+
+export interface WorldRequest {
+  minPopulation: number | undefined;
+  maxPopulation: number | undefined;
+  regionSelected: string;
+  searchTerm?: string;
+}

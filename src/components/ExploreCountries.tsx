@@ -1,31 +1,55 @@
+import { useState, useEffect } from "react";
 import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
-import { FullCountry } from "../utilities/interface";
+  FullCountry,
+  WorldRequest,
+} from "../utilities/interface";
 import useCountries from "../hooks/useCountries";
 import Flags from "./Flags";
 import styles from "./components.module.css";
+import { countryRegions } from "../utilities/filter";
 
 export default function ExploreCountries() {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [worldRequest, setWorldRequest] =
+    useState<WorldRequest>({
+      minPopulation: undefined,
+      maxPopulation: undefined,
+      regionSelected: "all",
+      searchTerm: "",
+    });
+
   const {
     data,
     error,
     isLoading: loadingData,
-  } = useCountries(
-    pageNumber < 2
-      ? "?per_page=12"
-      : `?per_page=12&page=${pageNumber}`,
-  );
+  } = useCountries(worldRequest);
   const [imagesLoaded, setImagesLoaded] =
     useState(false);
 
+  const allCountries = data?.data;
   useEffect(() => {
-    if (data?.data) {
-      const imagePromises = data.data.map(
+    if (allCountries) {
+      setVisibleCountries(allCountries);
+    }
+  }, [allCountries]);
+
+  const [initialCountries, setInitialCountries] =
+    useState<FullCountry[]>([]);
+
+  useEffect(() => {
+    if (
+      allCountries &&
+      initialCountries.length === 0
+    ) {
+      setInitialCountries(allCountries);
+    }
+  }, [allCountries, initialCountries]);
+
+  const countryRegionsResults: string[] =
+    countryRegions(initialCountries);
+
+  useEffect(() => {
+    if (allCountries) {
+      const imagePromises = allCountries.map(
         (country: FullCountry) =>
           new Promise<void>((resolve) => {
             const img = new Image();
@@ -43,79 +67,115 @@ export default function ExploreCountries() {
           ),
         );
     }
-  }, [data]);
+  }, [allCountries]);
+
+  const [visibleCountries, setVisibleCountries] =
+    useState<FullCountry[]>(allCountries ?? []);
 
   const isLoading = loadingData || !imagesLoaded;
-  const [allCountries, setAllCountries] =
-    useState<FullCountry[]>([]);
-  const observerRef = useRef(null);
-
-  useEffect(() => {
-    if (data?.data) {
-      setAllCountries((prev) => [
-        ...prev,
-        ...data.data,
-      ]);
-    }
-  }, [data]);
-
-  const loadNextPage = useCallback(() => {
-    if (
-      !isLoading &&
-      data?.data?.length &&
-      pageNumber <
-        (data?.meta.last_page ?? Infinity) &&
-      data?.meta.current_page === pageNumber &&
-      imagesLoaded
-    ) {
-      setPageNumber((prev) => prev + 1);
-    }
-  }, [data, imagesLoaded, isLoading, pageNumber]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          loadNextPage();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-
-    const currentObserver = observerRef.current;
-    if (currentObserver)
-      observer.observe(currentObserver);
-
-    return () => {
-      if (currentObserver)
-        observer.unobserve(currentObserver);
-    };
-  }, [loadNextPage]);
 
   return (
     <main className={styles.main_container}>
-      <div>SEARCHBAR</div>
-      <div>DROPDOWN</div>
-      {allCountries &&
-        allCountries.length > 0 &&
+      <div
+        className={
+          styles.explore_countries_filter
+        }
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => {
+            const filtered = allCountries?.filter(
+              (country: FullCountry) =>
+                country.name
+                  .toLowerCase()
+                  .startsWith(
+                    e.target.value.toLowerCase(),
+                  ),
+            );
+            setVisibleCountries(filtered ?? []);
+          }}
+        />
+
+        <details
+          className={styles.population_dropdown}
+        >
+          <summary>Population Range</summary>
+          <div>
+            <label>
+              Min Population:
+              <input
+                type="number"
+                onChange={(e) => {
+                  setWorldRequest({
+                    ...worldRequest,
+                    minPopulation: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  });
+                }}
+              />
+            </label>
+            <label>
+              Max Population:
+              <input
+                type="number"
+                onChange={(e) => {
+                  setWorldRequest({
+                    ...worldRequest,
+                    maxPopulation: e.target.value
+                      ? Number(e.target.value)
+                      : undefined,
+                  });
+                }}
+              />
+            </label>
+          </div>
+        </details>
+
+        <select
+          value={
+            worldRequest.regionSelected ?? "all"
+          }
+          onChange={(e) => {
+            setWorldRequest({
+              ...worldRequest,
+              regionSelected: e.target.value,
+            });
+          }}
+        >
+          <option value="all">
+            All Continents
+          </option>
+
+          {countryRegionsResults?.map(
+            (region) => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ),
+          )}
+        </select>
+      </div>
+      {visibleCountries &&
+        visibleCountries.length > 0 &&
         imagesLoaded && (
-          <Flags flags={allCountries} />
+          <Flags flags={visibleCountries} />
         )}
       {(isLoading ||
-        (!imagesLoaded && !allCountries)) && (
+        (!imagesLoaded && !visibleCountries)) && (
         <div>Loading...</div>
       )}
-      {allCountries.length === 0 &&
+      {visibleCountries &&
+        visibleCountries.length === 0 &&
         !isLoading && (
           <div>No countries found</div>
         )}
       {error && (
-        <div>Error loading countries</div>
+        <div>
+          Error loading countries: {error.message}
+        </div>
       )}
-      <div
-        ref={observerRef}
-        style={{ height: "1px" }}
-      />
     </main>
   );
 }
