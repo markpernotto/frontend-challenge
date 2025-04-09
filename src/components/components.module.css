@@ -176,6 +176,8 @@
 
 .explore_countries_filter_population_dropdown {
   display: flex;
+  gap: 1rem;
+  justify-content: space-between;
 }
 
 .explore_countries_filter_population_dropdown > div {
@@ -183,9 +185,6 @@
   flex-direction: row;
   gap: 0.5rem;
 }
- .explore_countries_filter_population_dropdown div > label {
-  padding: 0 0.5rem;
- }
 
  .explore_countries_filter_population_dropdown div > input {
   background-color: #fff;
@@ -195,7 +194,6 @@
   display: flex;
   gap: 1rem;
   padding: 0.5rem;
-  width: 2rem;
  }
 
  .explore_countries_filter_region_dropdown {
