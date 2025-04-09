@@ -110,8 +110,8 @@ export default function ExploreCountries({
           }
         >
           <div>
-            <label>Min Population:</label>
             <input
+              placeholder={"min population"}
               type="number"
               className={
                 styles.explore_countries_filter_input
@@ -127,8 +127,8 @@ export default function ExploreCountries({
             />
           </div>
           <div>
-            <label>Max Population:</label>
             <input
+              placeholder={"max population"}
               type="number"
               className={
                 styles.explore_countries_filter_input
@@ -181,8 +181,9 @@ export default function ExploreCountries({
         (!imagesLoaded && !visibleCountries)) && (
         <div>Loading...</div>
       )}
-      {visibleCountries &&
-        visibleCountries.length === 0 &&
+      {((visibleCountries &&
+        visibleCountries.length === 0) ||
+        !data) &&
         !isLoading && (
           <div>No countries found</div>
         )}

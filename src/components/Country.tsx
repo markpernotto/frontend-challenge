@@ -1,4 +1,7 @@
-import { useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+} from "react-router-dom";
 import classnames from "classnames";
 import { CountryDarkModeProps } from "../utilities/interface";
 import useCountry from "../hooks/useCountry";
@@ -23,6 +26,9 @@ export default function CountryDetail({
         { [styles.dark_mode]: isDarkMode },
       )}
     >
+      <Link to={"/"}>
+        <div>{"<"} Back to Home</div>
+      </Link>
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading data</div>}
       <div

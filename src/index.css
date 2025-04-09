@@ -36,7 +36,16 @@ body {
 }
 
 a:link, a:visited {
-  color:#213547
+  color:#213547;
+  text-decoration: none;
+}
+
+.dark-mode a:link, .dark-mode a:visited {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+input {
+  color: #000000;
 }
 
 @media (prefers-color-scheme: light) {
