@@ -45,6 +45,10 @@ export interface Country {
   };
 }
 
+export interface CountryDarkModeProps {
+  isDarkMode: boolean;
+}
+
 export interface CurrentPresident {
   appointment_end_date: string;
   appointment_start_date: string;
@@ -55,6 +59,10 @@ export interface CurrentPresident {
     self: string;
   };
   name: string;
+}
+
+export interface ExploreProps {
+  isDarkMode: boolean;
 }
 
 export interface FlagProps {
@@ -106,6 +114,11 @@ export interface Meta {
   per_page: number;
   to: number;
   total: number;
+}
+
+export interface NavigationDarkModeProps {
+  toggleDarkMode: () => void;
+  isDarkMode: boolean;
 }
 
 export interface SlimCountry {

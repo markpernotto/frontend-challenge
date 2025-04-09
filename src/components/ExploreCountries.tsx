@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import classnames from "classnames";
 import {
+  ExploreProps,
   FullCountry,
   WorldRequest,
 } from "../utilities/interface";
@@ -8,7 +10,9 @@ import Flags from "./Flags";
 import styles from "./components.module.css";
 import { countryRegions } from "../utilities/filter";
 
-export default function ExploreCountries() {
+export default function ExploreCountries({
+  isDarkMode,
+}: ExploreProps) {
   const [worldRequest, setWorldRequest] =
     useState<WorldRequest>({
       minPopulation: undefined,
@@ -77,9 +81,10 @@ export default function ExploreCountries() {
   return (
     <main className={styles.main_container}>
       <div
-        className={
-          styles.explore_countries_filter
-        }
+        className={classnames(
+          styles.explore_countries_filter,
+          { [styles.dark_mode]: isDarkMode },
+        )}
       >
         <input
           type="text"

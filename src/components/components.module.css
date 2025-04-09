@@ -3,13 +3,18 @@
 */
 
 .navigation_bar {
-  background-color: #2b2b2b;
+  background-color: #ccc;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 1rem;
   position: sticky;
   top: 0;
+}
+
+.navigation_bar.dark_mode {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #1b1b1b;
 }
 
 .navigation_bar_contents {
@@ -22,6 +27,16 @@
 
 .navigation_bar_title h1 {
   margin: 0;
+}
+
+.navigation_bar_dark_mode_toggle {
+  border: 0;
+}
+.navigation_bar_dark_mode_toggle:hover {
+  cursor: pointer;
+}
+.navigation_bar_dark_mode_toggle img {
+  width: 2rem;
 }
 
 /*
@@ -48,10 +63,8 @@
 
 .flag_container {
   border-radius: 0.5rem;
-  background-color: #2b2b2b;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);  
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -59,8 +72,14 @@
   text-decoration: none;
   width: 170px;
 }
+
+.flag_container:link,
+.flag_container:visited {
+  color: rgba(255, 255, 255, 0.87);
+  text-decoration: none;
+}
+
 .flag_container:hover {
-  background-color: #3b3b3b;
   cursor: pointer;
 }
 
@@ -115,4 +134,24 @@
 }
 .country_detail_container > div > h1 {
   margin: 0;
+}
+
+/*
+  Explore Countries Filter
+*/
+.explore_countries_filter {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 1rem 0;
+  position: sticky;
+  top: 48px;
+}
+
+.explore_countries_filter.dark_mode {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }

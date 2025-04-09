@@ -1,9 +1,13 @@
 import { useLocation } from "react-router-dom";
+import classnames from "classnames";
+import { CountryDarkModeProps } from "../utilities/interface";
 import useCountry from "../hooks/useCountry";
 import styles from "./components.module.css";
 import useCountryStates from "../hooks/useCountryStates";
 
-export default function CountryDetail() {
+export default function CountryDetail({
+  isDarkMode,
+}: CountryDarkModeProps) {
   const { pathname } = useLocation();
   const country = pathname.split("/").pop();
   const { data, error, isLoading } =
@@ -13,7 +17,12 @@ export default function CountryDetail() {
   const countryDetail = data?.data;
   const countryStates = countryStatesData?.data;
   return (
-    <main className={styles.main_container}>
+    <main
+      className={classnames(
+        styles.main_container,
+        { [styles.dark_mode]: isDarkMode },
+      )}
+    >
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading data</div>}
       <div
