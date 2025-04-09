@@ -29,9 +29,20 @@ const Navigation = ({
         onClick={() => toggleDarkMode()}
       >
         {isDarkMode ? (
-          <img src={SunIcon} />
+          <img
+            className={
+              styles.navigation_bar_sun_icon
+            }
+            src={SunIcon}
+            title="Light Mode"
+            alt="Sun Icon"
+          />
         ) : (
-          <img src={MoonIcon} />
+          <img
+            src={MoonIcon}
+            title="Dark Mode"
+            alt="Moon Icon"
+          />
         )}
       </button>
     </div>

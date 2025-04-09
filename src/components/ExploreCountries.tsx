@@ -89,6 +89,9 @@ export default function ExploreCountries({
         <input
           type="text"
           placeholder="Search..."
+          className={
+            styles.explore_countries_filter_search
+          }
           onChange={(e) => {
             const filtered = allCountries?.filter(
               (country: FullCountry) =>
@@ -101,44 +104,51 @@ export default function ExploreCountries({
             setVisibleCountries(filtered ?? []);
           }}
         />
-
-        <details
-          className={styles.population_dropdown}
+        <div
+          className={
+            styles.explore_countries_filter_population_dropdown
+          }
         >
-          <summary>Population Range</summary>
           <div>
-            <label>
-              Min Population:
-              <input
-                type="number"
-                onChange={(e) => {
-                  setWorldRequest({
-                    ...worldRequest,
-                    minPopulation: e.target.value
-                      ? Number(e.target.value)
-                      : undefined,
-                  });
-                }}
-              />
-            </label>
-            <label>
-              Max Population:
-              <input
-                type="number"
-                onChange={(e) => {
-                  setWorldRequest({
-                    ...worldRequest,
-                    maxPopulation: e.target.value
-                      ? Number(e.target.value)
-                      : undefined,
-                  });
-                }}
-              />
-            </label>
+            <label>Min Population:</label>
+            <input
+              type="number"
+              className={
+                styles.explore_countries_filter_input
+              }
+              onChange={(e) => {
+                setWorldRequest({
+                  ...worldRequest,
+                  minPopulation: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                });
+              }}
+            />
           </div>
-        </details>
+          <div>
+            <label>Max Population:</label>
+            <input
+              type="number"
+              className={
+                styles.explore_countries_filter_input
+              }
+              onChange={(e) => {
+                setWorldRequest({
+                  ...worldRequest,
+                  maxPopulation: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                });
+              }}
+            />
+          </div>
+        </div>
 
         <select
+          className={
+            styles.explore_countries_filter_region_dropdown
+          }
           value={
             worldRequest.regionSelected ?? "all"
           }

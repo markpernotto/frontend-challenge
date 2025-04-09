@@ -6,6 +6,7 @@
   background-color: #ccc;
   display: flex;
   flex-direction: row;
+  height: 48px;
   justify-content: space-between;
   gap: 1rem;
   position: sticky;
@@ -26,10 +27,13 @@
 }
 
 .navigation_bar_title h1 {
+  font-size: 1.25rem;
   margin: 0;
+  padding: 10px 0;
 }
 
 .navigation_bar_dark_mode_toggle {
+  background-color: transparent;
   border: 0;
 }
 .navigation_bar_dark_mode_toggle:hover {
@@ -37,6 +41,10 @@
 }
 .navigation_bar_dark_mode_toggle img {
   width: 2rem;
+}
+
+.navigation_bar_sun_icon path {
+  fill: #fff;
 }
 
 /*
@@ -154,4 +162,58 @@
 .explore_countries_filter.dark_mode {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+}
+
+.explore_countries_filter_search {
+  background-color: #fff;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.explore_countries_filter_population_dropdown {
+  display: flex;
+}
+
+.explore_countries_filter_population_dropdown > div {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+ .explore_countries_filter_population_dropdown div > label {
+  padding: 0 0.5rem;
+ }
+
+ .explore_countries_filter_population_dropdown div > input {
+  background-color: #fff;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  width: 2rem;
+ }
+
+ .explore_countries_filter_region_dropdown {
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+  min-height:32px;
+ }
+
+
+@media (max-width: 900px) {
+  .explore_countries_filter {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 2%;
+  }
+
+  .explore_countries_filter_search {
+    width: 100%;
+  }
 }
