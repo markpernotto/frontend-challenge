@@ -181,8 +181,9 @@ export default function ExploreCountries({
         (!imagesLoaded && !visibleCountries)) && (
         <div>Loading...</div>
       )}
-      {visibleCountries &&
-        visibleCountries.length === 0 &&
+      {((visibleCountries &&
+        visibleCountries.length === 0) ||
+        !data) &&
         !isLoading && (
           <div>No countries found</div>
         )}

@@ -26,13 +26,7 @@ export default function CountryDetail({
         { [styles.dark_mode]: isDarkMode },
       )}
     >
-      <Link
-        style={{
-          color: "white",
-          textDecoration: "none",
-        }}
-        to={"/"}
-      >
+      <Link to={"/"}>
         <div>{"<"} Back to Home</div>
       </Link>
       {isLoading && <div>Loading...</div>}

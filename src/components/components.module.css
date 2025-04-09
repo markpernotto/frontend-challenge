@@ -56,6 +56,11 @@
   padding: 0 5%;
 }
 
+.main_container.dark_mode a:link,
+.main_container.dark_mode a:visited {
+  color: rgba(255, 255, 255, 0.87);
+}
+
 /*
   Flags
 */
@@ -81,8 +86,8 @@
   width: 170px;
 }
 
-.flag_container:link,
-.flag_container:visited {
+.dark_mode .flag_container:link,
+.dark_mode .flag_container:visited {
   color: rgba(255, 255, 255, 0.87);
   text-decoration: none;
 }
